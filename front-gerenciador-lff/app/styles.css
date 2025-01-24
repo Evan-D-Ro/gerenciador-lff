@@ -1,0 +1,9 @@
+/* Oculta as barras de rolagem */
+body::-webkit-scrollbar {
+    display: none;
+  }
+  
+/* Permite o comportamento de rolagem */
+body {
+overflow: scroll;
+}

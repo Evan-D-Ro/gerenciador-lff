@@ -107,7 +107,7 @@ export function User() {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>{usuario ? usuario : "Minha conta"}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Configurações</DropdownMenuItem>
+        <DropdownMenuItem>Alterar Senha</DropdownMenuItem>
         <DropdownMenuItem>Suporte</DropdownMenuItem>
         <DropdownMenuSeparator />
 

@@ -39,7 +39,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "middleware.js",
-    ".next/types/app/page.ts"
+    ".next/types/app/page.ts",
+    "components/popup-exclusao.js"
   ],
   "exclude": [
     "node_modules"

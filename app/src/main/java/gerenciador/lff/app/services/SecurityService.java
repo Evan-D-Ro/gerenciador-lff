@@ -26,7 +26,7 @@ public class SecurityService {
     @Autowired
     PermissoesRepository permissoesRepository;
 
-    private static Logger logger = LoggerFactory.getLogger(SecurityService.class);
+    private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
 
     public String autenticar(JsonNode json)
     {
@@ -124,7 +124,67 @@ public class SecurityService {
         {
             return null;
         }
+    }
 
+    public Map<String, Object> getPermissoesUser(String token, String usuarioSearch) {
+        Permissoes permissoes;
+
+        if(JWTTokenProvider.verifyToken(token))
+        {
+            String usuario = (String) JWTTokenProvider.getAllClaimsFromToken(token).get("usuario");
+            logger.info("Buscando permissões do usuário - " + usuario);
+            Pessoa pessoa = pessoaRepository.findByUsuario(usuario);
+            logger.info("Usuário " + usuario + " encontrado");
+
+            permissoes = permissoesRepository.findByPessoa(pessoa);
+            logger.info("Permissões de " + usuario + " encontradas");
+            if(permissoes.getEditarPermissoes())
+            {
+                pessoa = pessoaRepository.findByUsuario(usuarioSearch);
+                Permissoes usuPermissoes = permissoesRepository.findByPessoa(pessoa);
+                Map<String, Object> response = new HashMap<>();
+                response.put("permissoes", usuPermissoes);
+                logger.info("Buscar permissões concluído");
+                return response;        
+            }
+            else
+            {
+                logger.info("Usuário não autorizado a buscar permissões.");
+                return null;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public Permissoes obterPermissoes(String token) {
+        Permissoes permissoes = null;
+
+        if(JWTTokenProvider.verifyToken(token))
+        {
+            String usuario = (String) JWTTokenProvider.getAllClaimsFromToken(token).get("usuario");
+            logger.info("Buscando permissões do usuário - " + usuario);
+            Pessoa pessoa = pessoaRepository.findByUsuario(usuario);
+            if(pessoa != null)
+            {
+                logger.info("Usuário " + usuario + " encontrado");
+                permissoes = permissoesRepository.findByPessoa(pessoa);
+                if(permissoes != null)
+                    logger.info("Permissões de " + usuario + " encontradas");
+                else
+                    logger.info("Permissões de " + usuario + " não encontradas");
+                logger.info("Buscar permissões concluído");
+            }
+            else
+                logger.info("Usuário " + usuario + " não encontrado");
+            return permissoes;
+        }
+        else
+        {
+            return null;
+        }
     }
 
 }

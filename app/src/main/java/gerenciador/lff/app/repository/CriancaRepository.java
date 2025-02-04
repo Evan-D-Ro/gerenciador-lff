@@ -12,6 +12,8 @@ import gerenciador.lff.app.model.Crianca;
 public interface CriancaRepository extends JpaRepository <Crianca, Long> {
     
     List<Crianca> findByNomeContainingIgnoreCase(String nome);
+    
+    Crianca findByNome(String nome);
 
     List<Crianca> findByNomeContainingIgnoreCaseAndCadastroAtivoIsFalse(String search);
 

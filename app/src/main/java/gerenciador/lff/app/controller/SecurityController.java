@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -26,7 +27,7 @@ public class SecurityController {
     @Autowired
     private SecurityService securityService;
 
-    private static Logger logger = LoggerFactory.getLogger(SecurityController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SecurityController.class);
 
     @PostMapping("login")
     public ResponseEntity<Object> logar(@RequestBody JsonNode json, HttpServletResponse response) throws Exception {
@@ -89,6 +90,17 @@ public class SecurityController {
         }
     }
 
+    @GetMapping("get-permissoes-user")
+    public ResponseEntity<Object> getPermissoesUser(@RequestParam(required = false) String usuario, HttpServletRequest request) {
+        String token = getToken(request);
+        if (!token.isEmpty()) {
+            return ResponseEntity.ok(securityService.getPermissoesUser(token, usuario));
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Não autorizado!");
+        }
+    }
+
     private String getToken(HttpServletRequest request){
         String token = "";
         if (request.getCookies() != null) {
@@ -105,4 +117,5 @@ public class SecurityController {
         }
         return null;
     }
+
 }

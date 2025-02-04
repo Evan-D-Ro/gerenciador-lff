@@ -8,15 +8,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer{
     @Override
-    public void addViewControllers(ViewControllerRegistry registry)
+    public void addViewControllers(@SuppressWarnings("null") ViewControllerRegistry registry)
     {
         
     }
 
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
+    public void addCorsMappings(@SuppressWarnings("null") CorsRegistry registry) {
         registry.addMapping("/**")
-            .allowedOrigins("http://localhost:3000", "http://192.168.1.22:3000") // Permitir localhost
+            .allowedOrigins("http://localhost:3000", "http://192.168.1.21:3000") // Permitir localhost
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")
             .allowCredentials(true);

@@ -18,7 +18,7 @@ public class EscolaService {
     @Autowired
     private EscolaRepository escolaRepository;
 
-    private static Logger logger = LoggerFactory.getLogger(EscolaService.class);
+    private static final Logger logger = LoggerFactory.getLogger(EscolaService.class);
 
     public Map<String, Object> getEscolas(String search, int offset) {
         List<Escola> escolas;
@@ -42,6 +42,19 @@ public class EscolaService {
         response.put("escolas", escolas);
         response.put("newOffset", newOffset);
         response.put("totalEscolas", totalEscolas);
+        logger.info("Buscar escolas concluído");
+        return response;
+    }
+
+    public Map<String, Object> getAllEscolas() {
+        List<Escola> escolas;
+
+        logger.info("Buscando todas as escolas");
+        escolas = escolaRepository.findAll();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("escolas", escolas);
+
         logger.info("Buscar escolas concluído");
         return response;
     }

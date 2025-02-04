@@ -19,7 +19,7 @@ public class TurmaService {
     @Autowired
     private TurmaRepository turmaRepository;
 
-    private static Logger logger = LoggerFactory.getLogger(TurmaService.class);
+    private static final Logger logger = LoggerFactory.getLogger(TurmaService.class);
 
     public Map<String, Object> getTurmas(String search, int offset) {
         List<Turma> turmas;
@@ -50,6 +50,20 @@ public class TurmaService {
         logger.info("Buscar turmas concluído");
         return response;
     }
+
+    public Map<String, Object> getAllTurmas() {
+        List<Turma> turmas;
+
+        logger.info("Buscando todas as Turmas");
+        turmas = turmaRepository.findAll();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("turmas", turmas);
+
+        logger.info("Buscar turmas concluído");
+        return response;
+    }
+
 
     public void deleteTurmaById(Long id) {
         turmaRepository.deleteById(id);

@@ -165,3 +165,23 @@ input[type='search']::-ms-clear {
   background-color: #0e168a;
   /* Um tom mais escuro ao passar o mouse */
 }
+
+/* Personalizar o scroll */
+.scroll-form::-webkit-scrollbar {
+  width: 8px;
+  /* Largura do scrollbar */
+}
+
+.scroll-form::-webkit-scrollbar-thumb {
+  background-color: #252525f2;
+  /* Cor do thumb (parte rolável) */
+  border-radius: 10px;
+  /* Bordas arredondadas no thumb */
+}
+
+.scroll-form::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Cor de fundo da "trilha" do scrollbar */
+  border-radius: 10px;
+  /* Bordas arredondadas na trilha */
+}

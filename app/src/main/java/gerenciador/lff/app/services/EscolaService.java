@@ -50,7 +50,7 @@ public class EscolaService {
         List<Escola> escolas;
 
         logger.info("Buscando todas as escolas");
-        escolas = escolaRepository.findAll();
+        escolas = escolaRepository.findAllByOrderByNomeAsc();
 
         Map<String, Object> response = new HashMap<>();
         response.put("escolas", escolas);

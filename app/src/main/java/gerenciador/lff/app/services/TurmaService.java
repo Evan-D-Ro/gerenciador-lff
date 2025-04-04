@@ -55,7 +55,7 @@ public class TurmaService {
         List<Turma> turmas;
 
         logger.info("Buscando todas as Turmas");
-        turmas = turmaRepository.findAll();
+        turmas = turmaRepository.findAllByOrderByNomeAsc();
 
         Map<String, Object> response = new HashMap<>();
         response.put("turmas", turmas);

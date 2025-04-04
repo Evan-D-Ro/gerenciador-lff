@@ -148,6 +148,104 @@ export async function getCriancas(search: string, offset: number, selectTab: str
     };
 }
 
+export async function getCriancasEscola(search: string, offset: number, selectTab: string, idEscola: string, idTurma: string) {
+    const url = new URL(`${process.env.NEXT_PUBLIC_API_IP}/api/crianca/escola`);
+    if (search) url.searchParams.append('search', search);
+    url.searchParams.append('offset', offset.toString());
+    url.searchParams.append('selectTab', selectTab.toString());
+    url.searchParams.append('idEscola', idEscola.toString());
+    url.searchParams.append('idTurma', idTurma.toString());
+
+    const response = await fetch(url.toString(), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    });
+
+    if (!response.ok) {
+        if (response.status === 401) {
+            window.location.href = "/dashboard/unauthorized";
+        }
+        else {
+            window.location.href = "/dashboard/error";
+        }
+    }
+
+
+    const data = await response.json();
+    return {
+        criancas: data.criancas,
+        newOffset: data.newOffset,
+        totalCriancas: data.totalCriancas
+    };
+}
+
+export async function getCriancasTurma(search: string, offset: number, selectTab: string, idTurma: string) {
+    const url = new URL(`${process.env.NEXT_PUBLIC_API_IP}/api/crianca/turma`);
+    if (search) url.searchParams.append('search', search);
+    url.searchParams.append('offset', offset.toString());
+    url.searchParams.append('selectTab', selectTab.toString());
+    url.searchParams.append('idTurma', idTurma.toString());
+
+    const response = await fetch(url.toString(), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    });
+
+    if (!response.ok) {
+        if (response.status === 401) {
+            window.location.href = "/dashboard/unauthorized";
+        }
+        else {
+            window.location.href = "/dashboard/error";
+        }
+    }
+
+
+    const data = await response.json();
+    return {
+        criancas: data.criancas,
+        newOffset: data.newOffset,
+        totalCriancas: data.totalCriancas
+    };
+}
+
+export async function getChamada(idTurma: string, dataChamada: string) {
+    const formattedDataChamada = new Date(dataChamada).toISOString().split('T')[0];
+
+    const url = new URL(`${process.env.NEXT_PUBLIC_API_IP}/api/chamada/get-chamada`);
+    url.searchParams.append('idTurma', idTurma.toString());
+    url.searchParams.append('dataChamada', formattedDataChamada);  // Passar a data formatada
+
+    const response = await fetch(url.toString(), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    });
+
+    if (!response.ok) {
+        if (response.status === 401) {
+            window.location.href = "/dashboard/unauthorized";
+        }
+        else {
+            window.location.href = "/dashboard/error";
+        }
+    }
+
+    const data = await response.json();
+    return {
+        presencas: data.presencas || []
+    };
+}
+
+
 export async function salvarCrianca(crianca: any) {
     const url = `${process.env.NEXT_PUBLIC_API_IP}/api/crianca/salvar`;
 

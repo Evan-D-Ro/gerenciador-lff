@@ -10,4 +10,5 @@ public interface EscolaRepository extends JpaRepository <Escola, Long> {
     
     List<Escola> findByNomeContainingIgnoreCase(String nome);
 
+    List<Escola> findAllByOrderByNomeAsc();
 }

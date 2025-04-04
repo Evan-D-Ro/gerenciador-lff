@@ -271,15 +271,22 @@ function MobileNav({ permissoes }: any) {
             <TooltipContent side="down">
               <ul>
                 <li className="px-4 py-2">
-                  <Link href="#" className="text-gray-700 hover:text-gray-900">ANIVERSÁRIOS NO MÊS</Link>
+                  <Link href="#" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                    ANIVERSÁRIOS NO MÊS
+                  </Link>
                 </li>
                 <li className="px-4 py-2">
-                  <Link href="#" className="text-gray-700 hover:text-gray-900">FALTAS</Link>
+                  <Link href="#" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                    FALTAS
+                  </Link>
                 </li>
                 <li className="px-4 py-2">
-                  <Link href="#" className="text-gray-700 hover:text-gray-900">ALUNOS POR ESCOLA</Link>
+                  <Link href="#" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                    RELAÇÃO NOMINAL
+                  </Link>
                 </li>
-              </ul></TooltipContent>
+              </ul>
+            </TooltipContent>
           </Tooltip>
           <Link
             href="/dashboard/admin"

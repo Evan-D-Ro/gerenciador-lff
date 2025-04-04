@@ -12,13 +12,22 @@ import { Menu } from 'lucide-react';
 
 import { MoreHorizontal } from 'lucide-react';
 import { TableCell, TableRow } from '@/components/ui/table';
-import { SelectEscola } from '@/lib/db';
 import { deleteProduct } from './actions';
+import { useRouter } from "next/navigation";
 
-export function Escola({ escola }: { escola: SelectEscola }) {
+export function Escola({ escola }: { escola: any }) {
+    const router = useRouter();
+
+    const handleRedirect = () => {
+        router.push(`/dashboard/criancasEscola?idEscola=${escola.id}`);
+    };
     return (
         <TableRow>
-            <TableCell className="font-medium">{escola.nome}</TableCell>
+            <TableCell className="font-medium">
+                <button onClick={handleRedirect} className="text-blue-500 hover:underline">
+                    {escola.nome}
+                </button>
+            </TableCell>
             <TableCell>
                 <Badge variant="outline" className="capitalize">
                     {escola.contato}

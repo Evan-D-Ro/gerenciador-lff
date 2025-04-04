@@ -12,11 +12,23 @@ import { MoreHorizontal } from 'lucide-react';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { deleteProduct } from './actions';
 import { Menu } from 'lucide-react';
+import { useRouter } from "next/navigation";
 
-export function Turma({ turma }: { turma: SelectTurma }) {
+export function Turma({ turma }: { turma: any }) {
+
+    const router = useRouter();
+
+    const handleRedirect = () => {
+        router.push(`/dashboard/criancasTurma?idTurma=${turma.id}`);
+    };
+
     return (
         <TableRow>
-            <TableCell className="font-medium">{turma.nome}</TableCell>
+            <TableCell className="font-medium">
+                <button onClick={handleRedirect} className="text-blue-500 hover:underline">
+                    {turma.nome}
+                </button>
+            </TableCell>
             <TableCell>
                 <Badge variant="outline" className="capitalize">
                     {turma.visibilidade ? 'Ativa' : 'Desativada'}

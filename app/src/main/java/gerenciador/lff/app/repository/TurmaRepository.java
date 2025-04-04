@@ -13,4 +13,7 @@ public interface TurmaRepository extends JpaRepository <Turma, Long> {
     List<Turma> findByNomeContainingIgnoreCase(String nome);
     Page<Turma> findAllByOrderByNomeAsc(Pageable pageable);
 
+    List<Turma> findAllByOrderByNomeAsc();
+
+
 }
